@@ -4,9 +4,10 @@
 
 import json
 import pdb
-import requests
 import sys
 import traceback
+
+import requests
 
 
 def get_movies_from_tastedive(movie):
@@ -76,6 +77,6 @@ if __name__ == "__main__":
             movies = sys.argv[1:]
         recommendations = get_sorted_recommendations(movies)
         print("\n".join(recommendations))
-    except:
+    except Exception:
         traceback.print_exc()
         pdb.post_mortem()
