@@ -2,12 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-punctuation_chars = ["'", '"', ",", ".", "!", ":", ";", '#', '@']
-
-
 def strip_punctuation(value):
+    punctuation_chars = ["'", '"', ",", ".", "!", ":", ";", "#", "@"]
     for ch in punctuation_chars:
-        value = value.replace(ch, '')
+        value = value.replace(ch, "")
     return value
 
 
@@ -15,7 +13,7 @@ def strip_punctuation(value):
 positive_words = []
 with open("positive_words.txt") as pos_f:
     for lin in pos_f:
-        if lin[0] != ';' and lin[0] != '\n':
+        if lin[0] != ";" and lin[0] != "\n":
             positive_words.append(lin.strip())
 
 
@@ -23,14 +21,14 @@ with open("positive_words.txt") as pos_f:
 negative_words = []
 with open("negative_words.txt") as pos_f:
     for lin in pos_f:
-        if lin[0] != ';' and lin[0] != '\n':
+        if lin[0] != ";" and lin[0] != "\n":
             negative_words.append(lin.strip())
 
 
 def get_pos(text):
     num_positive = 0
     for word in text.split():
-        if strip_punctuation(word) in positive_words:
+        if strip_punctuation(word.lower()) in positive_words:
             num_positive += 1
     return num_positive
 
@@ -38,7 +36,7 @@ def get_pos(text):
 def get_neg(text):
     num_negative = 0
     for word in text.split():
-        if strip_punctuation(word) in negative_words:
+        if strip_punctuation(word.lower()) in negative_words:
             num_negative += 1
     return num_negative
 
@@ -47,7 +45,7 @@ twitter_data = []
 with open("project_twitter_data.csv") as inf:
     for line in inf:
         twitter_data.append(line.strip().split(","))
-    twitter_data = twitter_data[1:] # skip header
+    twitter_data = twitter_data[1:]  # skip header
 
 
 with open("resulting_data.csv", "w") as outf:
